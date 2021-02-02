@@ -1,26 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import { Router } from '@reach/router';
+import { useMediaQuery } from 'react-responsive';
+import { HomePage } from './pages';
+import { Footer, Header, SideBar, Warning } from './components';
+import { RcLayout, RcSideNav } from './rcomps';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+export const App: React.FC = () => {
+  const [showLeftMenu, setShowLeftMenu] = useState(false);
+  const isNarrow = useMediaQuery({ maxWidth: 600 });
+
+  const warning = <Warning />;
+
+  const header = <Header setShowLeftMenu={setShowLeftMenu} />;
+
+  const footer = <Footer />;
+
+  const sidebar = <SideBar />;
+
+  const leftMenu = (
+    <RcSideNav onClose={() => setShowLeftMenu(false)}>
+      <SideBar />
+    </RcSideNav>
   );
-}
 
-export default App;
+  const main = (
+    <Router>
+      <HomePage path="/" />
+    </Router>
+  );
+
+  return (
+    <RcLayout
+      warning={warning}
+      header={header}
+      sidebar={sidebar}
+      main={main}
+      footer={footer}
+      leftMenu={leftMenu}
+      showSideBar={!isNarrow}
+      showLeftMenu={showLeftMenu}
+    />
+  );
+};
