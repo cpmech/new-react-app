@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Router } from '@reach/router';
 import { useMediaQuery } from 'react-responsive';
-import { Helmet } from 'react-helmet';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { HomePage } from './pages';
 import { Footer, Header, SideBar, Warning } from './components';
 import { RcLayout, RcSideNav } from './rcomps';
@@ -32,7 +32,7 @@ export const App: React.FC = () => {
   );
 
   return (
-    <>
+    <HelmetProvider>
       <Helmet>
         <style>{cssHtml(0)}</style>
       </Helmet>
@@ -46,6 +46,6 @@ export const App: React.FC = () => {
         showSideBar={!isNarrow}
         showLeftMenu={showLeftMenu}
       />
-    </>
+    </HelmetProvider>
   );
 };

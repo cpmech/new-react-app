@@ -82,13 +82,13 @@ yarn install
 # add dependencies
 message "✨ add dependencies"
 yarn add @cpmech/basic @cpmech/util @cpmech/react-icons @cpmech/rcomps \
-    @emotion/react react-responsive @reach/router react-helmet
+    @emotion/react react-responsive @reach/router react-helmet-async
 
 # add dev dependencies
 message "✨ add dev dependencies"
 yarn add -D husky lint-staged prettier \
     eslint-config-prettier eslint-plugin-prettier \
-    @types/react-responsive @types/reach__router @types/react-helmet \
+    @types/react-responsive @types/reach__router @types/react-helmet-async \
     @storybook/addon-essentials @storybook/preset-create-react-app @storybook/react
 
 # run tests
