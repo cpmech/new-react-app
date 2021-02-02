@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { Router } from '@reach/router';
 import { useMediaQuery } from 'react-responsive';
+import { Helmet } from 'react-helmet';
 import { HomePage } from './pages';
 import { Footer, Header, SideBar, Warning } from './components';
 import { RcLayout, RcSideNav } from './rcomps';
+import { cssHtml } from './cssHtml';
 
 export const App: React.FC = () => {
   const [showLeftMenu, setShowLeftMenu] = useState(false);
@@ -30,15 +32,20 @@ export const App: React.FC = () => {
   );
 
   return (
-    <RcLayout
-      warning={warning}
-      header={header}
-      sidebar={sidebar}
-      main={main}
-      footer={footer}
-      leftMenu={leftMenu}
-      showSideBar={!isNarrow}
-      showLeftMenu={showLeftMenu}
-    />
+    <>
+      <Helmet>
+        <style>{cssHtml(0)}</style>
+      </Helmet>
+      <RcLayout
+        warning={warning}
+        header={header}
+        sidebar={sidebar}
+        main={main}
+        footer={footer}
+        leftMenu={leftMenu}
+        showSideBar={!isNarrow}
+        showLeftMenu={showLeftMenu}
+      />
+    </>
   );
 };

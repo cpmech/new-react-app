@@ -69,6 +69,7 @@ sad -i '/"eject":/d' package.json
 message "copy src files"
 cp -avf $TEMPLATE/src/App.test.tsx ./src/
 cp -avf $TEMPLATE/src/App.tsx ./src/
+cp -avf $TEMPLATE/src/cssHtml.ts ./src/
 cp -avf $TEMPLATE/src/index.tsx ./src/
 cp -rvf $TEMPLATE/src/components ./src/
 cp -rvf $TEMPLATE/src/pages ./src/
@@ -81,13 +82,13 @@ yarn install
 # add dependencies
 message "✨ add dependencies"
 yarn add @cpmech/basic @cpmech/util @cpmech/react-icons @cpmech/rcomps \
-    @emotion/react react-responsive @reach/router
+    @emotion/react react-responsive @reach/router react-helmet
 
 # add dev dependencies
 message "✨ add dev dependencies"
 yarn add -D husky lint-staged prettier \
     eslint-config-prettier eslint-plugin-prettier \
-    @types/react-responsive @types/reach__router \
+    @types/react-responsive @types/reach__router @types/react-helmet \
     @storybook/addon-essentials @storybook/preset-create-react-app @storybook/react
 
 # run tests
