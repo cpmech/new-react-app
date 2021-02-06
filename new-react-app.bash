@@ -3,8 +3,13 @@
 set -e
 
 # check required tools
+echo "yarn --version"
 yarn --version
+echo "npm-check-updates --version"
 npm-check-updates --version
+
+# options
+PRESENTATION=${1:-"OFF"}
 
 # constants
 TEMPLATE="`dirname \"$0\"`"
@@ -90,6 +95,13 @@ yarn add -D husky lint-staged prettier \
     eslint-config-prettier eslint-plugin-prettier \
     @types/react-responsive @types/reach__router @types/react-helmet-async \
     @storybook/addon-essentials @storybook/preset-create-react-app @storybook/react
+
+# PRESENTATION
+if [[ "${REVEALJS}" == "ON" ]]; then
+    message "✨ adding pkgs for presentation"
+    yarn add dompurify katex marked
+    yarn add -D @types/dompurify @types/katex @types/marked
+fi
 
 # run tests
 message "🔥 run tests"
