@@ -1,16 +1,42 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import { IconClose } from '@cpmech/react-icons';
+import { RcLinkOrDiv } from '../../rcomps';
 
-export const Warning: React.FC = () => (
+export interface WarningProps {
+  hide: () => void;
+  height?: number;
+  sizeIcon?: number;
+}
+
+export const Warning: React.FC<WarningProps> = ({ hide, height = 50, sizeIcon = 24 }) => (
   <div
     css={css`
       background-color: #c01626;
-      min-height: 100px;
+      height: ${height}px;
       display: flex;
       justify-content: center;
       align-items: center;
+      position: relative;
     `}
   >
-    WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING
+    <p
+      css={css`
+        color: #eeeeee;
+      `}
+    >
+      WARNING WARNING WARNING
+    </p>
+    <div
+      css={css`
+        position: absolute;
+        top: ${Math.max(0, height - sizeIcon) / 2}px;
+        right: 20px;
+      `}
+    >
+      <RcLinkOrDiv onClick={() => hide()} color="#fff">
+        <IconClose size={sizeIcon} />
+      </RcLinkOrDiv>
+    </div>
   </div>
 );

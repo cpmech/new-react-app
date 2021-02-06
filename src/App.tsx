@@ -2,31 +2,33 @@ import { useState } from 'react';
 import { Router } from '@reach/router';
 import { useMediaQuery } from 'react-responsive';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-import { HomePage } from './pages';
+import { ChartsPage, HomePage } from './pages';
 import { Footer, Header, SideBar, Warning } from './components';
 import { RcLayout, RcSideNav } from './rcomps';
 import { cssHtml } from './cssHtml';
 
 export const App: React.FC = () => {
+  const [showWarning, setShowWarning] = useState(true);
   const [showLeftMenu, setShowLeftMenu] = useState(false);
   const isNarrow = useMediaQuery({ maxWidth: 600 });
 
-  const warning = <Warning />;
+  const warning = <Warning hide={() => setShowWarning(false)} />;
 
-  const header = <Header setShowLeftMenu={setShowLeftMenu} />;
+  const header = <Header show={() => setShowLeftMenu(true)} withMenuButton={isNarrow} />;
 
   const footer = <Footer />;
 
-  const sidebar = <SideBar />;
+  const sidebar = <SideBar onMenu={false} />;
 
   const leftMenu = (
-    <RcSideNav onClose={() => setShowLeftMenu(false)}>
-      <SideBar />
+    <RcSideNav onClose={() => setShowLeftMenu(false)} bgColor="rgba(0,0,0,0.8)" width={180}>
+      <SideBar onMenu={true} />
     </RcSideNav>
   );
 
   const main = (
     <Router>
+      <ChartsPage path="/charts" />
       <HomePage path="/" />
     </Router>
   );
@@ -37,15 +39,13 @@ export const App: React.FC = () => {
         <style>{cssHtml(0)}</style>
       </Helmet>
       <RcLayout
-        warning={warning}
+        warning={showWarning && warning}
         header={header}
-        sidebar={sidebar}
+        sidebar={!isNarrow && sidebar}
         main={main}
         footer={footer}
-        leftMenu={leftMenu}
-        showSideBar={!isNarrow}
-        showLeftMenu={showLeftMenu}
       />
+      {isNarrow && showLeftMenu && leftMenu}
     </HelmetProvider>
   );
 };
