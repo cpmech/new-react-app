@@ -5,11 +5,11 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "type-check": "tsc",
+    "test": "jest --verbose",
+    "tw": "jest --watch --verbose",
     "lint": "eslint --ignore-path .eslintignore . --ext ts --ext tsx --quiet --fix",
-    "lint:fix": "yarn lint --fix",
-    "postinstall": "bash ./zscripts/npm_postinstall.bash"
+    "postinstall": "bash ./zscripts/npm_postinstall.bash",
+    "cdk": "bash ./zscripts/cdk.bash"
   },
   "eslintConfig": {
     "extends": [

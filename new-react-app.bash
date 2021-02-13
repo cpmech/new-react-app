@@ -102,16 +102,15 @@ cp -rvf $TEMPLATE/.vscode .
 cp -rvf $TEMPLATE/zscripts .
 
 # fix package.json
-message "📝 fix package.json"
-sad -i '/"eject":/i\    "type-check": "tsc",' package.json
+message "📝 fix package.json and tsconfig.json"
+sad -i '/"test":/d' package.json
+sad -i '/"eject":/i\    "test": "jest --verbose",' package.json
+sad -i '/"eject":/i\    "tw": "jest --watch --verbose",' package.json
 sad -i '/"eject":/i\    "lint": "eslint --ignore-path .eslintignore . --ext ts --ext tsx --quiet --fix",' package.json
-    if [ "$USE_NPM" = "true" ]; then
-        sad -i '/"eject":/i\    "lint:fix": "npm run lint --fix",' package.json
-    else
-        sad -i '/"eject":/i\    "lint:fix": "yarn lint --fix",' package.json
-    fi
-sad -i '/"eject":/i\    "postinstall": "bash ./zscripts/npm_postinstall.bash"' package.json
+sad -i '/"eject":/i\    "postinstall": "bash ./zscripts/npm_postinstall.bash",' package.json
+sad -i '/"eject":/i\    "cdk": "bash ./zscripts/cdk.bash"' package.json
 sad -i '/"eject":/d' package.json
+sed -i 's/"target": "es5"/"target": "es2018"/' tsconfig.json
 
 # copy src files
 message "copy src files"
@@ -154,7 +153,7 @@ CI=true pkg_test
 # git commit changes
 message "👍 git commit changes"
 git add .gitignore .eslintignore jest.config.js .prettierrc \
-    .vscode/settings.json zscripts/npm_postinstall.bash package.json src
+    package.json setupTests.ts tsconfig.json .vscode az-cdk src zscripts
 if [ "$USE_NPM" = "true" ]; then
     echo
 else
