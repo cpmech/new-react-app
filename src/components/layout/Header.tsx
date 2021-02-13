@@ -5,21 +5,21 @@ import { RcLinkOrDiv } from '../../rcomps';
 
 export interface HeaderProps {
   show: () => void;
-  height?: number;
-  sizeIcon?: number;
+  height?: string;
+  sizeIcon?: string;
   withMenuButton?: boolean;
 }
 
 export const Header: React.FC<HeaderProps> = ({
   show,
-  height = 100,
-  sizeIcon = 32,
+  height = '100px',
+  sizeIcon = '32px',
   withMenuButton = true,
 }) => (
   <div
     css={css`
       background-color: #4a76ff;
-      height: ${height}px;
+      height: ${height};
       color: white;
       display: flex;
       justify-content: center;
@@ -38,7 +38,7 @@ export const Header: React.FC<HeaderProps> = ({
       <div
         css={css`
           position: absolute;
-          top: ${Math.max(0, height - sizeIcon) / 2}px;
+          top: calc((${height} - ${sizeIcon}) / 2);
           left: 20px;
         `}
       >

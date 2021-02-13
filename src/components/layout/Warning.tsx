@@ -5,11 +5,11 @@ import { RcLinkOrDiv } from '../../rcomps';
 
 export interface WarningProps {
   hide: () => void;
-  height?: number;
-  sizeIcon?: number;
+  height?: string;
+  sizeIcon?: string;
 }
 
-export const Warning: React.FC<WarningProps> = ({ hide, height = 50, sizeIcon = 24 }) => (
+export const Warning: React.FC<WarningProps> = ({ hide, height = '50px', sizeIcon = '24px' }) => (
   <div
     css={css`
       background-color: #c01626;
@@ -30,7 +30,7 @@ export const Warning: React.FC<WarningProps> = ({ hide, height = 50, sizeIcon = 
     <div
       css={css`
         position: absolute;
-        top: ${Math.max(0, height - sizeIcon) / 2}px;
+        top: calc((${height} - ${sizeIcon}) / 2);
         right: 20px;
       `}
     >

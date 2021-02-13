@@ -18,7 +18,7 @@ export const App: React.FC = () => {
   const sidebar = <SideBar onMenu={false} />;
 
   const leftMenu = (
-    <RcSideNav onClose={() => setShowLeftMenu(false)} bgColor="rgba(0,0,0,0.8)" width={180}>
+    <RcSideNav onClose={() => setShowLeftMenu(false)} bgColor="rgba(0,0,0,0.8)" width="180px">
       <SideBar onMenu={true} />
     </RcSideNav>
   );
