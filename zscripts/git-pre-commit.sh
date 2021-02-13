@@ -20,7 +20,7 @@ else
 fi
 
 # run linter on staged files => save exit code for later
-npm run --silent eslint $staged_files --quiet --fix
+npm run --silent eslint -- $staged_files --quiet --fix
 linter_exit_code=$?
 
 # add files auto-fixed by the linter
