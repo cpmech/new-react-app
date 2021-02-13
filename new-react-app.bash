@@ -95,8 +95,6 @@ echo "src/rcomps" >> .gitignore
 # copy configuration files
 message "📜 copy configuration files"
 cp -av $TEMPLATE/.eslintignore .
-cp -av $TEMPLATE/.huskyrc .
-cp -av $TEMPLATE/.lintstagedrc .
 cp -av $TEMPLATE/.prettierrc .
 cp -av $TEMPLATE/jest.config.js .
 cp -rvf $TEMPLATE/.vscode .
@@ -146,7 +144,7 @@ CI=true pkg_test
 
 # git commit changes
 message "👍 git commit changes"
-git add .gitignore yarn.lock .eslintignore .huskyrc jest.config.js .lintstagedrc .prettierrc \
+git add .gitignore yarn.lock .eslintignore jest.config.js .prettierrc \
     .vscode/settings.json zscripts/npm_postinstall.bash package.json src \
     && git commit -m "Re-Init"
 
