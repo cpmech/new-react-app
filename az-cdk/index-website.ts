@@ -3,12 +3,12 @@ import { WebsiteConstruct } from '@cpmech/az-cdk';
 import { envars } from './envars';
 
 const app = new App();
-const stackName = `dp-${envars.STAGE}-website`;
+const stackName = `mystack-${envars.STAGE}-website`;
 const stack = new Stack(app, stackName);
 
 const website = new WebsiteConstruct(stack, 'Website', {
   domain: envars.MYAPP_DOMAIN,
-  comment: 'DP Website',
+  comment: 'My Website',
   skipMX: false,
   hostedZoneId: envars.MYAPP_HOSTED_ZONE_ID,
   certificateArn: envars.MYAPP_CERTIFICATE_ARN,
