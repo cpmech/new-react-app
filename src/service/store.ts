@@ -28,16 +28,15 @@ const newZeroState = (): IState => ({
   data: { email: '' },
 });
 
-// define a callback function to load state data
-const onLoad = async (_: string): Promise<IState> => {
-  throw new Error('TODO');
-};
-
 // extend the SimpleStore class; it may have any additional members
 class Store extends SimpleStore<IState, null> {
   constructor() {
-    super(newZeroState, onLoad);
+    super(newZeroState);
 
+    // set ready flag here [important]
+    this.ready = true;
+
+    // set current route
     this.state.interface.route = window.location.hash;
 
     // listen for route changes
@@ -46,9 +45,9 @@ class Store extends SimpleStore<IState, null> {
       () => {
         const newRoute = window.location.hash;
         if (newRoute !== this.state.interface.route) {
-          this.begin();
+          this.notifyBeginReady();
           this.state.interface.route = newRoute;
-          this.end();
+          this.notifyEndReady();
         }
       },
       false,
@@ -62,40 +61,40 @@ class Store extends SimpleStore<IState, null> {
   };
 
   setShowWarning = (value: boolean, message = 'WARNING') => {
-    this.begin();
+    this.notifyBeginStart();
     this.state.interface.showWarning = value;
     this.state.interface.warningMessage = message;
-    this.end();
+    this.notifyEndStart();
   };
 
   setShowHeader = (value: boolean) => {
-    this.begin();
+    this.notifyBeginStart();
     this.state.interface.showHeader = value;
-    this.end();
+    this.notifyEndStart();
   };
 
   setShowLeftMenu = (value: boolean) => {
-    this.begin();
+    this.notifyBeginStart();
     this.state.interface.showLeftMenu = value;
-    this.end();
+    this.notifyEndStart();
   };
 
   setShowSideBar = (value: boolean) => {
-    this.begin();
+    this.notifyBeginStart();
     this.state.interface.showSideBar = value;
-    this.end();
+    this.notifyEndStart();
   };
 
   loadTopic = async (id: string, forceReload = true) => {
-    this.begin();
+    this.notifyBeginStart();
     console.log('loadTopic: TODO');
-    this.end();
+    this.notifyEndStart();
   };
 
   downloadJson = async () => {
-    this.begin();
+    this.notifyBeginStart();
     downloadJson(this.state.data, `my-data`);
-    this.end();
+    this.notifyEndStart();
   };
 }
 

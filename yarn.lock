@@ -3234,10 +3234,10 @@
   resolved "https://registry.yarnpkg.com/@cpmech/react-icons/-/react-icons-4.1.0.tgz#8d9cfc4e4ba471c1bbc12d605f7bd1eaaeaeb6e9"
   integrity sha512-5JnCIgZ9SNJH8tbahOTZ/RBPv7tfg4WttUP27S9cBNzc9swDj37Ppw6hZnHrF5T3SrD6RqrxdNhoU561W1lBmA==
 
-"@cpmech/simple-state@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@cpmech/simple-state/-/simple-state-1.0.1.tgz#a299c23023bcdd8a99f61f0fbd4483f8310df799"
-  integrity sha512-kpTth9VPlADeS+LRBgXOskt0peAoENTsunBj4Ej9G5GdvRfsKP0uspzhvbr7CET6iDPs3gMbMUh4zFpdI3H2RA==
+"@cpmech/simple-state@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@cpmech/simple-state/-/simple-state-2.0.0.tgz#fbb302d6eec0b460f0f3735c6007f50c299e0f4d"
+  integrity sha512-DSHJ/lqsiNrRNbSDzmW1dhigpCBGTpu9nDNO0D7FTChcneLJ6v8btiYc2t2kuamHhG/GJ7brpgk12qtw0Gc70A==
 
 "@cpmech/util@^1.26.0":
   version "1.26.0"

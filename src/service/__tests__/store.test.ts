@@ -6,6 +6,7 @@ describe('store', () => {
     store.loadTopic('todo');
     await sleep(50);
     expect(store.error).toBe('');
+    expect(store.started).toBeTruthy();
     expect(store.ready).toBeTruthy();
   });
 });

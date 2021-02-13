@@ -4,6 +4,7 @@ import { store } from './store';
 export const useStoreObserver = (observerName: string) => {
   const [data, setData] = useState({
     error: '',
+    started: false,
     ready: false,
     showWarning: false,
     showHeader: false,
@@ -20,6 +21,7 @@ export const useStoreObserver = (observerName: string) => {
     // may have been already configured and we missed the notification
     setData({
       error: store.error,
+      started: store.started,
       ready: store.ready,
       showWarning: store.state.interface.showWarning,
       showHeader: store.state.interface.showHeader,
@@ -33,6 +35,7 @@ export const useStoreObserver = (observerName: string) => {
       if (!finished) {
         setData({
           error: store.error,
+          started: store.started,
           ready: store.ready,
           showWarning: store.state.interface.showWarning,
           showHeader: store.state.interface.showHeader,

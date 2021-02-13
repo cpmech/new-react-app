@@ -12,7 +12,7 @@ export interface TopicsPageProps {
 }
 
 export const TopicsPage: React.FC<TopicsPageProps> = ({ topicId, sectionId }) => {
-  const { ready, error } = useStoreObserver('TopicsPage');
+  const { error, started } = useStoreObserver('TopicsPage');
 
   useEffect(() => {
     if (topicId) {
@@ -20,10 +20,10 @@ export const TopicsPage: React.FC<TopicsPageProps> = ({ topicId, sectionId }) =>
     }
   }, [topicId]);
 
-  if (!ready) {
+  if (!started) {
     return (
       <RcReadyOrErrorPopup
-        ready={ready}
+        ready={started}
         error={error}
         onClose={() => console.log("navigate('/')")}
       />

@@ -28,7 +28,7 @@ export const Header: React.FC<HeaderProps> = ({ withMenuButton = true }) => {
   if (!isTiny) {
     menuEntries.push({
       comp: (
-        <RcLinkOrDiv onClick={() => console.log("navigate('/')")}>
+        <RcLinkOrDiv onClick={() => store.setRoute('')}>
           <h2
             css={css`
               color: ${styles.colors.white()};
