@@ -97,6 +97,7 @@ message "📜 copy configuration files"
 cp -av $TEMPLATE/.eslintignore .
 cp -av $TEMPLATE/.prettierrc .
 cp -av $TEMPLATE/jest.config.js .
+cp -av $TEMPLATE/setupTests.ts .
 cp -rvf $TEMPLATE/.vscode .
 cp -rvf $TEMPLATE/zscripts .
 

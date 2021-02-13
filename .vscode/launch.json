@@ -12,7 +12,7 @@
         "--runInBand",
         "jest.config.js"
       ],
-      "cwd": "${workspaceFolder}/client",
+      "cwd": "${workspaceFolder}",
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
       "disableOptimisticBPs": true
