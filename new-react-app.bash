@@ -3,7 +3,7 @@
 set -e
 
 # options
-USE_NPM=${2:-"false"}
+USE_NPM=${2:-"true"}
 
 # check required tools
 if [ "$USE_NPM" = "true" ]; then
