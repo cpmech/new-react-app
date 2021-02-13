@@ -48,16 +48,16 @@ pkg_i() {
 }
 pkg_add() {
     if [ "$USE_NPM" = "true" ]; then
-        npm install $1
+        npm install $@
     else
-        yarn add $1
+        yarn add $@
     fi
 }
 pkg_add_dev() {
     if [ "$USE_NPM" = "true" ]; then
-        npm install -D $1
+        npm install -D $@
     else
-        yarn add -D $1
+        yarn add -D $@
     fi
 }
 pkg_test() {
