@@ -114,12 +114,18 @@ sad -i '/"eject":/d' package.json
 
 # copy src files
 message "copy src files"
+rm ./src/App.css
 cp -avf $TEMPLATE/src/App.test.tsx ./src/
 cp -avf $TEMPLATE/src/App.tsx ./src/
-cp -avf $TEMPLATE/src/cssHtml.ts ./src/
+cp -avf $TEMPLATE/src/index.css ./src/
 cp -avf $TEMPLATE/src/index.tsx ./src/
 cp -rvf $TEMPLATE/src/components ./src/
+cp -rvf $TEMPLATE/src/data ./src/
+cp -rvf $TEMPLATE/src/layout ./src/
 cp -rvf $TEMPLATE/src/pages ./src/
+cp -rvf $TEMPLATE/src/service ./src/
+cp -rvf $TEMPLATE/src/styles ./src/
+cp -rvf $TEMPLATE/src/util ./src/
 
 # update dependencies
 message "🆕 update dependencies"
@@ -128,14 +134,14 @@ pkg_i
 
 # add dependencies
 message "✨ add dependencies"
-DEPS="@cpmech/basic @cpmech/util @cpmech/react-icons @cpmech/rcomps \
-    @emotion/react react-responsive"
+DEPS="@cpmech/basic @cpmech/js2ts @cpmech/rcomps @cpmech/react-icons @cpmech/simple-state \
+    @cpmech/util @emotion/react async-mutex react-responsive"
 pkg_add $DEPS
 
 # add dev dependencies
 message "✨ add dev dependencies"
-DEVDEPS="eslint-config-prettier eslint-plugin-prettier \
-    @types/react-responsive"
+DEVDEPS="@types/react-responsive eslint-config-prettier eslint-plugin-prettier \
+    prettier ts-jest ts-node typescript @cpmech/envars aws-cdk"
 pkg_add_dev $DEVDEPS
 
 # run tests
@@ -144,9 +150,14 @@ CI=true pkg_test
 
 # git commit changes
 message "👍 git commit changes"
-git add .gitignore yarn.lock .eslintignore jest.config.js .prettierrc \
-    .vscode/settings.json zscripts/npm_postinstall.bash package.json src \
-    && git commit -m "Re-Init"
+git add .gitignore .eslintignore jest.config.js .prettierrc \
+    .vscode/settings.json zscripts/npm_postinstall.bash package.json src
+if [ "$USE_NPM" = "true" ]; then
+    echo
+else
+    git add yarn.lock 
+fi
+git commit -m "Re-Init"
 
 # print success
 message "🎉 success!"
