@@ -93,6 +93,7 @@ pkg_create
 cd $PROJ
 echo ".eslintcache" >> .gitignore
 echo "src/rcomps" >> .gitignore
+echo "cdk.out" >> .gitignore
 
 # copy configuration files
 message "📜 copy configuration files"

@@ -14,6 +14,7 @@
     "**/yarn-debug.log*": true,
     "**/yarn-error.log*": true,
     "**/.eslintcache": true,
-    "src/rcomps": true
+    "src/rcomps": true,
+    "**/cdk.out": true
   }
 }
