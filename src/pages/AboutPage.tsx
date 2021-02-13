@@ -10,7 +10,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ category }) => {
   return (
     <RcCenterPage
       message={`About Page. Category = ${category}`}
-      heightMenu={`calc(${styles.dims.warning.height} + ${styles.dims.header.height})`}
+      heightMenu={`calc(${styles.dims.header.height} + ${styles.dims.footer.height})`}
       colorMessage={styles.colors.orange()}
     />
   );

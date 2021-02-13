@@ -10,7 +10,7 @@ export const NotFoundPage: React.FC<NotFoundPageProps> = () => {
   return (
     <RcCenterPage
       message="Sorry, cannot find what you were looking for."
-      heightMenu={`calc(${styles.dims.warning.height} + ${styles.dims.header.height})`}
+      heightMenu={`calc(${styles.dims.header.height} + ${styles.dims.footer.height})`}
     />
   );
 };

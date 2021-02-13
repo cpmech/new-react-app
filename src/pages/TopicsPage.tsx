@@ -42,7 +42,7 @@ export const TopicsPage: React.FC<TopicsPageProps> = ({ topicId, sectionId }) =>
 
   return (
     <RcCenterPage
-      heightMenu={`calc(${styles.dims.warning.height} + ${styles.dims.header.height})`}
+      heightMenu={`calc(${styles.dims.header.height} + ${styles.dims.footer.height})`}
       colorMessage={styles.colors.green()}
     >
       <div
