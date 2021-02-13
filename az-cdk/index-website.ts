@@ -7,11 +7,11 @@ const stackName = `dp-${envars.STAGE}-website`;
 const stack = new Stack(app, stackName);
 
 const website = new WebsiteConstruct(stack, 'Website', {
-  domain: envars.DP_DOMAIN,
+  domain: envars.MYAPP_DOMAIN,
   comment: 'DP Website',
   skipMX: false,
-  hostedZoneId: envars.DP_HOSTED_ZONE_ID,
-  certificateArn: envars.DP_CERTIFICATE_ARN,
+  hostedZoneId: envars.MYAPP_HOSTED_ZONE_ID,
+  certificateArn: envars.MYAPP_CERTIFICATE_ARN,
 });
 
 new CfnOutput(stack, 'CloudFrontId', {

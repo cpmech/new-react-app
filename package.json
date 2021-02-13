@@ -45,6 +45,7 @@
     "web-vitals": "^1.1.0"
   },
   "devDependencies": {
+    "@cpmech/az-cdk": "^8.1.0",
     "@cpmech/envars": "^2.23.0",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",

@@ -141,7 +141,8 @@ pkg_add $DEPS
 # add dev dependencies
 message "✨ add dev dependencies"
 DEVDEPS="@types/react-responsive eslint-config-prettier eslint-plugin-prettier \
-    prettier ts-jest ts-node typescript @cpmech/envars aws-cdk"
+    prettier ts-jest ts-node typescript \
+    @cpmech/az-cdk @cpmech/envars aws-cdk"
 pkg_add_dev $DEVDEPS
 
 # run tests
