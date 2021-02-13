@@ -1,6 +1,6 @@
-// see https://cssgradient.io/gradient-backgrounds/
-
-const bgs = [
+const backgroundsArray = [
+  `background-color: #fff;`,
+  `background-color: #e8dbde; background-image: linear-gradient(225deg, #e8dbde 0%, #d0a7ec 50%, #9ccae8 100%);`,
   `background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);`,
   `background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);`,
   `background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);`,
@@ -16,7 +16,10 @@ const bgs = [
   `background-color: #FA8BFF; background-image: linear-gradient(45deg, #FA8BFF 0%, #2BD2FF 52%, #2BFF88 90%);`,
 ];
 
-export const cssHtml = (bg = 0) => {
-  const i = bg % bgs.length;
-  return `html { margin: 0; } body { margin: 0; ${bgs[i]} -webkit-font-smoothing: antialiased; }`;
+export const backgrounds = {
+  list: backgroundsArray,
+  get: (index: number) => backgroundsArray[index % backgroundsArray.length],
 };
+
+// Reference:
+//   https://cssgradient.io/gradient-backgrounds/

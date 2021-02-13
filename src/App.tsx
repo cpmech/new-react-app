@@ -1,38 +1,45 @@
-import { Fragment, useState } from 'react';
+import { Fragment } from 'react';
 import { useMediaQuery } from 'react-responsive';
-import { HomePage } from './pages';
-import { Footer, Header, SideBar, Warning } from './components';
-import { RcLayout, RcSideNav } from './rcomps';
+import { Footer, Header, SideBar, Warning } from './layout';
+import { rcConfig, RcLayout, RcSideNav } from './rcomps';
+import { styles } from './styles';
+import { store, useStoreObserver } from './service';
+
+rcConfig.media.desktop.maxPageWidth = styles.dims.maxPageWidth;
 
 export const App: React.FC = () => {
-  const [showWarning, setShowWarning] = useState(true);
-  const [showLeftMenu, setShowLeftMenu] = useState(false);
-  const isNarrow = useMediaQuery({ maxWidth: 600 });
+  const { showWarning, showHeader, showLeftMenu, showSideBar } = useStoreObserver('App');
+  const isNarrow = useMediaQuery({ maxWidth: rcConfig.media.phone.maxWidth });
 
-  const warning = <Warning hide={() => setShowWarning(false)} />;
+  const warning = <Warning />;
 
-  const header = <Header show={() => setShowLeftMenu(true)} withMenuButton={isNarrow} />;
+  const header = <Header withMenuButton={isNarrow} />;
 
   const footer = <Footer />;
 
   const sidebar = <SideBar onMenu={false} />;
 
   const leftMenu = (
-    <RcSideNav onClose={() => setShowLeftMenu(false)} bgColor="rgba(0,0,0,0.8)" width="180px">
+    <RcSideNav
+      onClose={() => store.setShowLeftMenu(false)}
+      bgColor={styles.colors.transparent(0.8)}
+      width={styles.dims.leftMenu.width}
+    >
       <SideBar onMenu={true} />
     </RcSideNav>
   );
 
-  const main = <HomePage />;
+  const main = <div>HOME</div>;
 
   return (
     <Fragment>
       <RcLayout
         warning={showWarning && warning}
-        header={header}
-        sidebar={!isNarrow && sidebar}
+        header={showHeader && header}
+        sidebar={!isNarrow && showSideBar && sidebar}
         main={main}
         footer={footer}
+        maxContentWidth={`${styles.dims.maxPageWidth}px`}
       />
       {isNarrow && showLeftMenu && leftMenu}
     </Fragment>

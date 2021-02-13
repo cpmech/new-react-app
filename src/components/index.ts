@@ -1,1 +1,1 @@
-export * from './layout';
+export const hello = () => console.log("Hello World");

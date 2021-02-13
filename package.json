@@ -31,10 +31,13 @@
   },
   "dependencies": {
     "@cpmech/basic": "^4.23.0",
+    "@cpmech/js2ts": "^2.21.0",
     "@cpmech/rcomps": "^5.0.1",
     "@cpmech/react-icons": "^4.1.0",
+    "@cpmech/simple-state": "^1.0.1",
     "@cpmech/util": "^1.26.0",
     "@emotion/react": "^11.1.5",
+    "async-mutex": "^0.3.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-responsive": "^8.2.0",
