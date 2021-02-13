@@ -2,8 +2,12 @@
 
 set -e
 
+echo ">>> copy git pre-commit hook <<<"
+cp ./zscripts/git-pre-commit.sh ./.git/hooks/pre-commit
+chmod +x ./.git/hooks/pre-commit
+
 if [[ -d "./node_modules/@cpmech/rcomps/rcomps" ]]; then
-    echo ">>> moving rcomps to src <<<"
+    echo ">>> copy rcomps to src <<<"
     rm -rf ./src/rcomps
-    mv ./node_modules/@cpmech/rcomps/rcomps ./src/
+    cp -rf ./node_modules/@cpmech/rcomps/rcomps ./src/
 fi

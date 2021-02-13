@@ -5,6 +5,8 @@ set -e
 # check required tools
 echo "yarn --version"
 yarn --version
+echo "npm --version"
+npm --version
 echo "npm-check-updates --version"
 npm-check-updates --version
 
@@ -28,6 +30,44 @@ if [[ "$unamestr" == 'Darwin' ]]; then
     echo "brew install gnu-sed"
 fi
 
+# pkg commands
+USE_NPM="false"
+pkg_create() {
+    if [ "$USE_NPM" = "true" ]; then
+        npx create-react-app $PROJ --template typescript
+    else
+        yarn create react-app $PROJ --template typescript
+    fi
+}
+pkg_i() {
+    if [ "$USE_NPM" = "true" ]; then
+        npm install
+    else
+        yarn
+    fi
+}
+pkg_add() {
+    if [ "$USE_NPM" = "true" ]; then
+        npm install $1
+    else
+        yarn add $1
+    fi
+}
+pkg_add_dev() {
+    if [ "$USE_NPM" = "true" ]; then
+        npm install -D $1
+    else
+        yarn add -D $1
+    fi
+}
+pkg_test() {
+    if [ "$USE_NPM" = "true" ]; then
+        npm run test
+    else
+        yarn test
+    fi
+}
+
 # define message function
 message(){
     echo
@@ -47,7 +87,7 @@ PROJ=$1
 
 # create project
 message "🚀 create react app"
-yarn create react-app $PROJ --template typescript
+pkg_create
 cd $PROJ
 echo ".eslintcache" >> .gitignore
 echo "src/rcomps" >> .gitignore
@@ -66,7 +106,11 @@ cp -rvf $TEMPLATE/zscripts .
 message "📝 fix package.json"
 sad -i '/"eject":/i\    "type-check": "tsc",' package.json
 sad -i '/"eject":/i\    "lint": "eslint --ignore-path .eslintignore . --ext ts --ext tsx --quiet --fix",' package.json
-sad -i '/"eject":/i\    "lint:fix": "yarn lint --fix",' package.json
+    if [ "$USE_NPM" = "true" ]; then
+        sad -i '/"eject":/i\    "lint:fix": "npm run lint --fix",' package.json
+    else
+        sad -i '/"eject":/i\    "lint:fix": "yarn lint --fix",' package.json
+    fi
 sad -i '/"eject":/i\    "postinstall": "bash ./zscripts/npm_postinstall.bash"' package.json
 sad -i '/"eject":/d' package.json
 
@@ -82,30 +126,23 @@ cp -rvf $TEMPLATE/src/pages ./src/
 # update dependencies
 message "🆕 update dependencies"
 npm-check-updates -u
-yarn install
+pkg_i
 
 # add dependencies
 message "✨ add dependencies"
-yarn add @cpmech/basic @cpmech/util @cpmech/react-icons @cpmech/rcomps \
-    @emotion/react react-responsive @reach/router react-helmet-async
+DEPS="@cpmech/basic @cpmech/util @cpmech/react-icons @cpmech/rcomps \
+    @emotion/react react-responsive"
+pkg_add $DEPS
 
 # add dev dependencies
 message "✨ add dev dependencies"
-yarn add -D husky lint-staged prettier \
-    eslint-config-prettier eslint-plugin-prettier \
-    @types/react-responsive @types/reach__router @types/react-helmet-async \
-    @storybook/addon-essentials @storybook/preset-create-react-app @storybook/react
-
-# PRESENTATION
-if [[ "${REVEALJS}" == "ON" ]]; then
-    message "✨ adding pkgs for presentation"
-    yarn add dompurify katex marked
-    yarn add -D @types/dompurify @types/katex @types/marked
-fi
+DEVDEPS="eslint-config-prettier eslint-plugin-prettier \
+    @types/react-responsive"
+pkg_add_dev $DEPS
 
 # run tests
 message "🔥 run tests"
-CI=true yarn test
+CI=true pkg_test
 
 # git commit changes
 message "👍 git commit changes"

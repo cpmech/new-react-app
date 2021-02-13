@@ -1,10 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { IconChartBar, IconHome } from '@cpmech/react-icons';
 import { css } from '@emotion/react';
-import { navigate } from '@reach/router';
-import { RcLinkOrDiv, RcPair } from '../../rcomps';
-
-const sizeIcon = 32;
 
 export interface SideBarProps {
   color?: string;
@@ -40,17 +35,7 @@ export const SideBar: React.FC<SideBarProps> = ({
         padding: 40px 20px;
       `}
     >
-      <RcLinkOrDiv onClick={() => navigate('/')} color={fg} hoverColor={hc}>
-        <RcPair left={<IconHome size={sizeIcon} />} right={<span>HOME</span>} spaceBetween={true} />
-      </RcLinkOrDiv>
-
-      <RcLinkOrDiv onClick={() => navigate('/charts')} color={fg} hoverColor={hc}>
-        <RcPair
-          left={<IconChartBar size={sizeIcon} />}
-          right={<span>CHARTS</span>}
-          spaceBetween={true}
-        />
-      </RcLinkOrDiv>
+      TODO: {hc}
     </div>
   );
 };

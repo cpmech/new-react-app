@@ -1,9 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { RouteComponentProps } from '@reach/router';
 import { LoremIpsum } from '../rcomps';
 
-export interface HomePageProps extends RouteComponentProps {}
+export interface HomePageProps {}
 
 export const HomePage: React.FC<HomePageProps> = () => (
   <div

@@ -1,11 +1,8 @@
-import { useState } from 'react';
-import { Router } from '@reach/router';
+import { Fragment, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
-import { Helmet, HelmetProvider } from 'react-helmet-async';
-import { ChartsPage, HomePage } from './pages';
+import { HomePage } from './pages';
 import { Footer, Header, SideBar, Warning } from './components';
 import { RcLayout, RcSideNav } from './rcomps';
-import { cssHtml } from './cssHtml';
 
 export const App: React.FC = () => {
   const [showWarning, setShowWarning] = useState(true);
@@ -26,18 +23,10 @@ export const App: React.FC = () => {
     </RcSideNav>
   );
 
-  const main = (
-    <Router>
-      <ChartsPage path="/charts" />
-      <HomePage path="/" />
-    </Router>
-  );
+  const main = <HomePage />;
 
   return (
-    <HelmetProvider>
-      <Helmet>
-        <style>{cssHtml(0)}</style>
-      </Helmet>
+    <Fragment>
       <RcLayout
         warning={showWarning && warning}
         header={header}
@@ -46,6 +35,6 @@ export const App: React.FC = () => {
         footer={footer}
       />
       {isNarrow && showLeftMenu && leftMenu}
-    </HelmetProvider>
+    </Fragment>
   );
 };
