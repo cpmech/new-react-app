@@ -2,6 +2,7 @@ import { Fragment } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { Footer, Header, SideBar, Warning } from './layout';
 import { rcConfig, RcLayout, RcSideNav } from './rcomps';
+import { Router } from './pages';
 import { styles } from './styles';
 import { store, useStoreObserver } from './service';
 
@@ -29,7 +30,7 @@ export const App: React.FC = () => {
     </RcSideNav>
   );
 
-  const main = <div>HOME</div>;
+  const main = <Router />;
 
   return (
     <Fragment>

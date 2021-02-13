@@ -9,6 +9,7 @@ export const useStoreObserver = (observerName: string) => {
     showHeader: false,
     showLeftMenu: false,
     showSideBar: false,
+    route: '',
   });
 
   useEffect(() => {
@@ -24,6 +25,7 @@ export const useStoreObserver = (observerName: string) => {
       showHeader: store.state.interface.showHeader,
       showLeftMenu: store.state.interface.showLeftMenu,
       showSideBar: store.state.interface.showSideBar,
+      route: store.state.interface.route,
     });
 
     // now we can listen to further notifications, if any
@@ -36,6 +38,7 @@ export const useStoreObserver = (observerName: string) => {
           showHeader: store.state.interface.showHeader,
           showLeftMenu: store.state.interface.showLeftMenu,
           showSideBar: store.state.interface.showSideBar,
+          route: store.state.interface.route,
         });
       }
     }, observerName);

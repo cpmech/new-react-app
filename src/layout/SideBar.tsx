@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { IconChartBar, IconListDots } from '@cpmech/react-icons';
+import { IconChartBar, IconListDots, IconQuestion } from '@cpmech/react-icons';
 import { RcMenuEntry, RcMenuVert } from '../rcomps';
 import { store } from '../service';
 import { styles } from '../styles';
@@ -10,19 +10,24 @@ const nav = (route: string, onMenu: boolean) => {
   if (onMenu) {
     store.setShowLeftMenu(false);
   }
-  console.log('navigate(route);');
+  store.setRoute(route);
 };
 
 export const getEntries = (onMenu: boolean): RcMenuEntry[] => [
   {
+    icon: <IconQuestion size={styles.dims.icon.medium} />,
+    label: 'About',
+    onClick: () => nav('#about', onMenu),
+  },
+  {
     icon: <IconListDots size={styles.dims.icon.medium} />,
-    label: 'TODO',
-    onClick: () => nav('/', onMenu),
+    label: 'Topics',
+    onClick: () => nav('', onMenu),
     entries: topics.map((topic) => ({
       icon: <IconChartBar size={styles.dims.icon.small} />,
       label: topic,
       onClick: () => {
-        nav(`/topics/${topic}/1`, onMenu);
+        nav(`#topics-${topic}-1`, onMenu);
       },
     })),
   },

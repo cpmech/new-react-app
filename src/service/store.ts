@@ -10,6 +10,7 @@ interface IState {
     showHeader: boolean;
     showLeftMenu: boolean;
     showSideBar: boolean;
+    route: string;
   };
   data: IData;
 }
@@ -22,6 +23,7 @@ const newZeroState = (): IState => ({
     showHeader: true,
     showLeftMenu: false,
     showSideBar: true,
+    route: '',
   },
   data: { email: '' },
 });
@@ -35,7 +37,29 @@ const onLoad = async (_: string): Promise<IState> => {
 class Store extends SimpleStore<IState, null> {
   constructor() {
     super(newZeroState, onLoad);
+
+    this.state.interface.route = window.location.hash;
+
+    // listen for route changes
+    window.addEventListener(
+      'hashchange',
+      () => {
+        const newRoute = window.location.hash;
+        if (newRoute !== this.state.interface.route) {
+          this.begin();
+          this.state.interface.route = newRoute;
+          this.end();
+        }
+      },
+      false,
+    );
   }
+
+  setRoute = (route: string) => {
+    if (route !== this.state.interface.route) {
+      window.location.hash = route;
+    }
+  };
 
   setShowWarning = (value: boolean, message = 'WARNING') => {
     this.begin();
