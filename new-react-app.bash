@@ -2,16 +2,19 @@
 
 set -e
 
-# check required tools
-echo "yarn --version"
-yarn --version
-echo "npm --version"
-npm --version
-echo "npm-check-updates --version"
-npm-check-updates --version
-
 # options
 USE_NPM=${2:-"false"}
+
+# check required tools
+if [ "$USE_NPM" = "true" ]; then
+    echo "npm --version"
+    npm --version
+else
+    echo "yarn --version"
+    yarn --version
+fi
+echo "npm-check-updates --version"
+npm-check-updates --version
 
 # constants
 TEMPLATE="`dirname \"$0\"`"
@@ -159,7 +162,7 @@ message "👍 git commit changes"
 git add .gitignore .eslintignore jest.config.js .prettierrc \
     package.json setupTests.ts tsconfig.json .vscode az-cdk src zscripts
 if [ "$USE_NPM" = "true" ]; then
-    echo
+    git add package-lock.json
 else
     git add yarn.lock 
 fi
