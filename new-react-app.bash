@@ -126,6 +126,7 @@ cp -rvf $TEMPLATE/src/pages ./src/
 cp -rvf $TEMPLATE/src/service ./src/
 cp -rvf $TEMPLATE/src/styles ./src/
 cp -rvf $TEMPLATE/src/util ./src/
+cp -rvf $TEMPLATE/az-cdk .
 
 # update dependencies
 message "🆕 update dependencies"
