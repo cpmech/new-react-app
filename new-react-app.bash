@@ -136,7 +136,7 @@ pkg_add $DEPS
 message "✨ add dev dependencies"
 DEVDEPS="eslint-config-prettier eslint-plugin-prettier \
     @types/react-responsive"
-pkg_add_dev $DEPS
+pkg_add_dev $DEVDEPS
 
 # run tests
 message "🔥 run tests"
