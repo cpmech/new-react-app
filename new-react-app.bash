@@ -109,6 +109,7 @@ sad -i '/"test":/d' package.json
 sad -i '/"eject":/i\    "test": "jest --verbose",' package.json
 sad -i '/"eject":/i\    "tw": "jest --watch --verbose",' package.json
 sad -i '/"eject":/i\    "tsc": "tsc",' package.json
+sad -i '/"eject":/i\    "eslint": "eslint",' package.json
 sad -i '/"eject":/i\    "lint": "eslint --ignore-path .eslintignore . --ext ts --ext tsx --quiet --fix",' package.json
 sad -i '/"eject":/i\    "postinstall": "bash ./zscripts/npm_postinstall.bash",' package.json
 sad -i '/"eject":/i\    "cdk": "bash ./zscripts/cdk.bash"' package.json
