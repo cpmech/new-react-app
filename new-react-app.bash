@@ -11,7 +11,7 @@ echo "npm-check-updates --version"
 npm-check-updates --version
 
 # options
-PRESENTATION=${1:-"OFF"}
+USE_NPM=${2:-"false"}
 
 # constants
 TEMPLATE="`dirname \"$0\"`"
@@ -31,7 +31,6 @@ if [[ "$unamestr" == 'Darwin' ]]; then
 fi
 
 # pkg commands
-USE_NPM="false"
 pkg_create() {
     if [ "$USE_NPM" = "true" ]; then
         npx create-react-app $PROJ --template typescript
@@ -145,6 +144,11 @@ DEVDEPS="@types/react-responsive eslint-config-prettier eslint-plugin-prettier \
     prettier ts-jest ts-node typescript \
     @cpmech/az-cdk @cpmech/envars aws-cdk"
 pkg_add_dev $DEVDEPS
+
+# run npm install again, because it doesn't trigger the postinstall hook automatically
+if [ "$USE_NPM" = "true" ]; then
+    pkg_i
+fi
 
 # run tests
 message "🔥 run tests"
