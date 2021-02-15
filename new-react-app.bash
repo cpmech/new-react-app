@@ -97,7 +97,6 @@ echo "cdk.out" >> .gitignore
 # copy configuration files
 message "📜 copy configuration files"
 cp -av $TEMPLATE/.eslintignore .
-cp -av $TEMPLATE/.eslintrc.js .
 cp -av $TEMPLATE/.prettierrc .
 cp -av $TEMPLATE/jest.config.js .
 cp -av $TEMPLATE/setupTests.ts .
@@ -162,7 +161,7 @@ CI=true pkg_test
 
 # git commit changes
 message "👍 git commit changes"
-git add .gitignore .eslintignore .eslintrc.js jest.config.js .prettierrc \
+git add .gitignore .eslintignore jest.config.js .prettierrc \
     package.json setupTests.ts tsconfig.json .vscode az-cdk src zscripts
 if [ "$USE_NPM" = "true" ]; then
     git add package-lock.json
