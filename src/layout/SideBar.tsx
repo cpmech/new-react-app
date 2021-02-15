@@ -1,5 +1,4 @@
 /** @jsxImportSource @emotion/react */
-import { IconChartBar, IconListDots, IconQuestion } from '@cpmech/react-icons';
 import { RcMenuEntry, RcMenuVert } from '../rcomps';
 import { store } from '../service';
 import { styles } from '../styles';
@@ -15,16 +14,16 @@ const nav = (route: string, onMenu: boolean) => {
 
 export const getEntries = (onMenu: boolean): RcMenuEntry[] => [
   {
-    icon: <IconQuestion size={styles.dims.icon.medium} />,
+    icon: <div>ICON</div>,
     label: 'About',
     onClick: () => nav('#about', onMenu),
   },
   {
-    icon: <IconListDots size={styles.dims.icon.medium} />,
+    icon: <div>ICON</div>,
     label: 'Topics',
     onClick: () => nav('', onMenu),
     entries: topics.map((topic) => ({
-      icon: <IconChartBar size={styles.dims.icon.small} />,
+      icon: <div>ICON</div>,
       label: topic,
       onClick: () => {
         nav(`#topics-${topic}-1`, onMenu);

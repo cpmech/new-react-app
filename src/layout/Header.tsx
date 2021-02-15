@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { useMediaQuery } from 'react-responsive';
-import { IconBars } from '@cpmech/react-icons';
 import { RcLinkOrDiv, RcMenuEntry, RcMenuHoriz } from '../rcomps';
 import { styles } from '../styles';
 import { store } from '../service';
@@ -19,7 +18,7 @@ export const Header: React.FC<HeaderProps> = ({ withMenuButton = true }) => {
     menuEntries.push({
       comp: (
         <RcLinkOrDiv onClick={() => store.setShowLeftMenu(true)} color={styles.colors.white()}>
-          <IconBars size={styles.dims.icon.large} />
+          <div>MENU</div>
         </RcLinkOrDiv>
       ),
     });

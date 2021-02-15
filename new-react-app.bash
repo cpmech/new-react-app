@@ -139,7 +139,7 @@ pkg_i
 
 # add dependencies
 message "✨ add dependencies"
-DEPS="@cpmech/basic @cpmech/js2ts @cpmech/rcomps @cpmech/react-icons @cpmech/simple-state \
+DEPS="@cpmech/basic @cpmech/js2ts @cpmech/rcomps @cpmech/simple-state \
     @cpmech/util @emotion/react async-mutex react-responsive"
 pkg_add $DEPS
 

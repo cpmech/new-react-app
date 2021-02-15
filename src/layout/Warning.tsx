@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { IconClose } from '@cpmech/react-icons';
 import { RcLinkOrDiv, RcMenuEntry, RcMenuHoriz } from '../rcomps';
 import { styles } from '../styles';
 import { store } from '../service';
+import { RcIconClose } from '../rcomps/icons';
 
 export interface WarningProps {}
 
@@ -23,7 +23,7 @@ export const Warning: React.FC<WarningProps> = () => {
     {
       comp: (
         <RcLinkOrDiv onClick={() => store.setShowWarning(false)} color={styles.colors.white()}>
-          <IconClose size={styles.dims.icon.medium} />
+          <RcIconClose size={styles.dims.icon.medium} />
         </RcLinkOrDiv>
       ),
     },
