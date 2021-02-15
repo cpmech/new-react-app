@@ -32,11 +32,11 @@
     ]
   },
   "dependencies": {
-    "@cpmech/basic": "^4.23.0",
-    "@cpmech/js2ts": "^2.21.0",
-    "@cpmech/rcomps": "^5.0.1",
+    "@cpmech/basic": "^4.25.0",
+    "@cpmech/js2ts": "^2.23.0",
+    "@cpmech/rcomps": "^5.1.0",
     "@cpmech/simple-state": "^2.0.0",
-    "@cpmech/util": "^1.26.0",
+    "@cpmech/util": "^1.28.0",
     "@emotion/react": "^11.1.5",
     "async-mutex": "^0.3.0",
     "react": "^17.0.1",
@@ -46,13 +46,13 @@
     "web-vitals": "^1.1.0"
   },
   "devDependencies": {
-    "@cpmech/az-cdk": "^8.1.0",
-    "@cpmech/envars": "^2.23.0",
+    "@cpmech/az-cdk": "^8.5.0",
+    "@cpmech/envars": "^2.25.0",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.7.1",
     "@types/jest": "^26.0.20",
-    "@types/node": "^14.14.27",
+    "@types/node": "^14.14.28",
     "@types/react": "^17.0.2",
     "@types/react-dom": "^17.0.1",
     "@types/react-responsive": "^8.0.2",
