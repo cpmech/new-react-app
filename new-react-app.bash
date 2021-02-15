@@ -18,7 +18,6 @@ npm-check-updates --version
 
 # constants
 TEMPLATE="`dirname \"$0\"`"
-APPSRC="$TEMPLATE/src"
 
 # fix 'sad' command in macOS
 sad() { 
