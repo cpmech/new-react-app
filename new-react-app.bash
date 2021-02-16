@@ -92,7 +92,6 @@ pkg_create
 cd $PROJ
 echo ".eslintcache" >> .gitignore
 echo "src/rcomps" >> .gitignore
-echo "cdk.out" >> .gitignore
 
 # copy configuration files
 message "📜 copy configuration files"
@@ -111,8 +110,7 @@ sad -i '/"eject":/i\    "tw": "jest --watch --verbose",' package.json
 sad -i '/"eject":/i\    "tsc": "tsc",' package.json
 sad -i '/"eject":/i\    "eslint": "eslint",' package.json
 sad -i '/"eject":/i\    "lint": "eslint --ignore-path .eslintignore . --ext ts --ext tsx --quiet --fix",' package.json
-sad -i '/"eject":/i\    "postinstall": "bash ./zscripts/npm_postinstall.bash",' package.json
-sad -i '/"eject":/i\    "cdk": "bash ./zscripts/cdk.bash"' package.json
+sad -i '/"eject":/i\    "postinstall": "bash ./zscripts/npm_postinstall.bash"' package.json
 sad -i '/"eject":/d' package.json
 sed -i 's/"target": "es5"/"target": "es2018"/' tsconfig.json
 
@@ -130,7 +128,6 @@ cp -rvf $TEMPLATE/src/pages ./src/
 cp -rvf $TEMPLATE/src/service ./src/
 cp -rvf $TEMPLATE/src/styles ./src/
 cp -rvf $TEMPLATE/src/util ./src/
-cp -rvf $TEMPLATE/az-cdk .
 
 # update dependencies
 message "🆕 update dependencies"
@@ -146,8 +143,7 @@ pkg_add $DEPS
 # add dev dependencies
 message "✨ add dev dependencies"
 DEVDEPS="@types/react-responsive eslint-config-prettier eslint-plugin-prettier \
-    prettier ts-jest ts-node typescript \
-    @cpmech/az-cdk @cpmech/envars aws-cdk"
+    prettier ts-jest ts-node typescript"
 pkg_add_dev $DEVDEPS
 
 # run npm install again, because it doesn't trigger the postinstall hook automatically
@@ -162,7 +158,7 @@ CI=true pkg_test
 # git commit changes
 message "👍 git commit changes"
 git add .gitignore .eslintignore jest.config.js .prettierrc \
-    package.json setupTests.ts tsconfig.json .vscode az-cdk src zscripts
+    package.json setupTests.ts tsconfig.json .vscode src zscripts
 if [ "$USE_NPM" = "true" ]; then
     git add package-lock.json
 else
