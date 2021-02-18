@@ -1,16 +1,32 @@
 /** @jsxImportSource @emotion/react */
-import { RcCenterPage } from '../rcomps';
-import { styles } from '../styles';
+import { css } from '@emotion/react';
 
-export interface NotFoundPageProps {
-  // TODO
-}
-
-export const NotFoundPage: React.FC<NotFoundPageProps> = () => {
+export const NotFoundPage: React.FC = () => {
   return (
-    <RcCenterPage
-      message="Sorry, cannot find what you were looking for."
-      heightMenu={`calc(${styles.dims.header.height} + ${styles.dims.footer.height})`}
-    />
+    <div
+      css={css`
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin-top: 20px;
+      `}
+    >
+      <div
+        css={css`
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        `}
+      >
+        <div>
+          <h1 style={{ fontSize: 100 }}>😱</h1>
+        </div>
+        <div>
+          <h1>404: Not found</h1>
+        </div>
+      </div>
+    </div>
   );
 };

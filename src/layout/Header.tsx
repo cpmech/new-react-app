@@ -27,7 +27,7 @@ export const Header: React.FC<HeaderProps> = ({ withMenuButton = true }) => {
   if (!isTiny) {
     menuEntries.push({
       comp: (
-        <RcLinkOrDiv onClick={() => store.setRoute('')}>
+        <RcLinkOrDiv onClick={() => store.navigate()}>
           <h2
             css={css`
               color: ${styles.colors.white()};
@@ -41,7 +41,15 @@ export const Header: React.FC<HeaderProps> = ({ withMenuButton = true }) => {
   }
 
   menuEntries.push({
-    comp: <div>Welcome</div>,
+    comp: (
+      <h2
+        css={css`
+          color: ${styles.colors.white()};
+        `}
+      >
+        Welcome
+      </h2>
+    ),
   });
 
   return (
@@ -58,7 +66,7 @@ export const Header: React.FC<HeaderProps> = ({ withMenuButton = true }) => {
         marginTop="0px"
         paddingVert="0px"
         paddingHoriz="20px"
-        maxWidth={`${styles.dims.maxPageWidth}px`}
+        maxWidth={`${styles.dims.minMaxPageWidth}px`}
       />
     </div>
   );

@@ -1,6 +1,8 @@
 import { useStoreObserver } from '../service';
 import { AboutPage } from './AboutPage';
 import { HomePage } from './HomePage';
+import { LegalPpPage } from './LegalPpPage';
+import { LegalTsPage } from './LegalTsPage';
 import { NotFoundPage } from './NotFoundPage';
 import { TopicsPage } from './TopicsPage';
 
@@ -17,7 +19,15 @@ export const Router: React.FC = () => {
     return <AboutPage category="me" />;
   }
 
-  if (route.length > 0) {
+  if (hash === '#legalpp') {
+    return <LegalPpPage />;
+  }
+
+  if (hash === '#legalts') {
+    return <LegalTsPage />;
+  }
+
+  if (route.length > 1) {
     return <NotFoundPage />;
   }
 

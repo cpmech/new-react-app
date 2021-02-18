@@ -6,10 +6,12 @@ export const useStoreObserver = (observerName: string) => {
     error: '',
     started: false,
     ready: false,
+    fullView: false,
     showWarning: false,
     showHeader: false,
     showLeftMenu: false,
     showSideBar: false,
+    showFooter: false,
     route: '',
   });
 
@@ -23,10 +25,12 @@ export const useStoreObserver = (observerName: string) => {
       error: store.error,
       started: store.started,
       ready: store.ready,
+      fullView: store.state.interface.fullView,
       showWarning: store.state.interface.showWarning,
       showHeader: store.state.interface.showHeader,
       showLeftMenu: store.state.interface.showLeftMenu,
       showSideBar: store.state.interface.showSideBar,
+      showFooter: store.state.interface.showFooter,
       route: store.state.interface.route,
     });
 
@@ -37,10 +41,12 @@ export const useStoreObserver = (observerName: string) => {
           error: store.error,
           started: store.started,
           ready: store.ready,
+          fullView: store.state.interface.fullView,
           showWarning: store.state.interface.showWarning,
           showHeader: store.state.interface.showHeader,
           showLeftMenu: store.state.interface.showLeftMenu,
           showSideBar: store.state.interface.showSideBar,
+          showFooter: store.state.interface.showFooter,
           route: store.state.interface.route,
         });
       }

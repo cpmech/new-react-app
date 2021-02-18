@@ -44,7 +44,7 @@ export const Warning: React.FC<WarningProps> = () => {
         marginTop="0px"
         paddingVert="0px"
         paddingHoriz="20px"
-        maxWidth={`${styles.dims.maxPageWidth}px`}
+        maxWidth={`${styles.dims.minMaxPageWidth}px`}
       />
     </div>
   );

@@ -4,7 +4,7 @@ import { dims } from './dims';
 export const cascade = {
   viewport: css`
     width: 100%;
-    padding-top: ${100.0 / dims.viewport.aspectRatio}%;
+    padding-top: ${100.0 / dims.aspectRatio}%;
     position: relative;
   `,
   absoluteZero: css`

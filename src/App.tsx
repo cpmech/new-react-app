@@ -1,24 +1,32 @@
 import { Fragment } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { Footer, Header, SideBar, Warning } from './layout';
-import { rcConfig, RcLayout, RcSideNav } from './rcomps';
+import { RcCenterPage, rcConfig, RcLayout, RcSideNav, RcSpinnerPage } from './rcomps';
 import { Router } from './pages';
 import { styles } from './styles';
 import { store, useStoreObserver } from './service';
 
-rcConfig.media.desktop.maxPageWidth = styles.dims.maxPageWidth;
+rcConfig.media.desktop.maxPageWidth = styles.dims.minMaxPageWidth;
 
 export const App: React.FC = () => {
-  const { showWarning, showHeader, showLeftMenu, showSideBar } = useStoreObserver('App');
+  const condition = useStoreObserver('App');
+
   const isNarrow = useMediaQuery({ maxWidth: rcConfig.media.phone.maxWidth });
 
-  const warning = <Warning />;
+  if (!condition.started) {
+    if (condition.error) {
+      return <RcCenterPage message={condition.error} />;
+    }
+    return <RcSpinnerPage />;
+  }
 
-  const header = <Header withMenuButton={isNarrow} />;
+  const warning = condition.showWarning && <Warning />;
 
-  const footer = <Footer />;
+  const header = condition.showHeader && <Header withMenuButton={isNarrow} />;
 
-  const sidebar = <SideBar onMenu={false} />;
+  const footer = condition.showFooter && <Footer />;
+
+  const sidebar = !isNarrow && condition.showSideBar && <SideBar onMenu={false} />;
 
   const leftMenu = (
     <RcSideNav
@@ -32,17 +40,21 @@ export const App: React.FC = () => {
 
   const main = <Router />;
 
+  const maxContentWidth = condition.fullView
+    ? styles.dims.maxMaxPageWidth
+    : styles.dims.minMaxPageWidth;
+
   return (
     <Fragment>
       <RcLayout
-        warning={showWarning && warning}
-        header={showHeader && header}
-        sidebar={!isNarrow && showSideBar && sidebar}
+        warning={warning}
+        header={header}
+        sidebar={sidebar}
         main={main}
         footer={footer}
-        maxContentWidth={`${styles.dims.maxPageWidth}px`}
+        maxContentWidth={`${maxContentWidth}px`}
       />
-      {isNarrow && showLeftMenu && leftMenu}
+      {isNarrow && condition.showLeftMenu && leftMenu}
     </Fragment>
   );
 };

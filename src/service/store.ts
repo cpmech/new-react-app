@@ -5,11 +5,13 @@ import { downloadJson } from './downloadJson';
 // define the state interface
 interface IState {
   interface: {
+    fullView: boolean;
     warningMessage: string;
     showWarning: boolean;
     showHeader: boolean;
     showLeftMenu: boolean;
     showSideBar: boolean;
+    showFooter: boolean;
     route: string;
   };
   data: IData;
@@ -18,46 +20,81 @@ interface IState {
 // define a function to generate a blank state
 const newZeroState = (): IState => ({
   interface: {
+    fullView: false,
     warningMessage: '',
     showWarning: false,
     showHeader: true,
     showLeftMenu: false,
     showSideBar: true,
+    showFooter: true,
     route: '',
   },
   data: { email: '' },
 });
 
+const onStart = async (_: string): Promise<IState> => {
+  // blank state
+  const state = newZeroState();
+
+  // load and set data
+  // TODO
+
+  // set route
+  state.interface.route = window.location.hash;
+
+  // return initialized state
+  return state;
+};
+
 // extend the SimpleStore class; it may have any additional members
 class Store extends SimpleStore<IState, null> {
-  constructor() {
-    super(newZeroState);
+  constructor(private scroolToTop = true, private silentNavigation = false) {
+    super(newZeroState, onStart);
 
     // set ready flag here [important]
     this.ready = true;
-
-    // set current route
-    this.state.interface.route = window.location.hash;
 
     // listen for route changes
     window.addEventListener(
       'hashchange',
       () => {
-        const newRoute = window.location.hash;
-        if (newRoute !== this.state.interface.route) {
-          this.notifyBeginReady();
-          this.state.interface.route = newRoute;
-          this.notifyEndReady();
+        if (window.location.hash !== this.state.interface.route) {
+          if (!this.silentNavigation) {
+            this.notifyBeginReady();
+          }
+          this.state.interface.route = window.location.hash;
+          if (!this.silentNavigation) {
+            if (this.scroolToTop) {
+              window.scrollTo(0, 0);
+            }
+            this.notifyEndReady();
+          }
+          this.silentNavigation = true;
         }
       },
       false,
     );
   }
 
-  setRoute = (route: string) => {
-    if (route !== this.state.interface.route) {
-      window.location.hash = route;
+  navigate = (route = '', silent = false) => {
+    this.silentNavigation = silent;
+    window.location.hash = route;
+  };
+
+  toggleFullView = () => {
+    this.notifyBeginStart();
+    if (this.state.interface.fullView) {
+      this.state.interface.fullView = false;
+      this.state.interface.showHeader = true;
+      this.state.interface.showSideBar = true;
+      this.state.interface.showFooter = true;
+    } else {
+      this.state.interface.fullView = true;
+      this.state.interface.showHeader = false;
+      this.state.interface.showSideBar = false;
+      this.state.interface.showFooter = false;
     }
+    this.notifyEndStart();
   };
 
   setShowWarning = (value: boolean, message = 'WARNING') => {
@@ -85,6 +122,12 @@ class Store extends SimpleStore<IState, null> {
     this.notifyEndStart();
   };
 
+  setShowFooter = (value: boolean) => {
+    this.notifyBeginStart();
+    this.state.interface.showFooter = value;
+    this.notifyEndStart();
+  };
+
   loadTopic = async (id: string, forceReload = true) => {
     this.notifyBeginStart();
     console.log('loadTopic: TODO');
@@ -100,3 +143,4 @@ class Store extends SimpleStore<IState, null> {
 
 // instantiate store
 export const store = new Store();
+store.doStart('');

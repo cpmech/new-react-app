@@ -1,29 +1,31 @@
 /** @jsxImportSource @emotion/react */
+import { IconStar } from '@cpmech/iricons/IconStar';
+import { IconStarOutline } from '@cpmech/iricons/IconStarOutline';
 import { RcMenuEntry, RcMenuVert } from '../rcomps';
 import { store } from '../service';
 import { styles } from '../styles';
 
-const topics = ['CIVL7215', 'Projects'];
+const topics = ['First', 'Second'];
 
 const nav = (route: string, onMenu: boolean) => {
   if (onMenu) {
     store.setShowLeftMenu(false);
   }
-  store.setRoute(route);
+  store.navigate(route);
 };
 
 export const getEntries = (onMenu: boolean): RcMenuEntry[] => [
   {
-    icon: <div>ICON</div>,
+    icon: <IconStar size={styles.dims.icon.medium} />,
     label: 'About',
     onClick: () => nav('#about', onMenu),
   },
   {
-    icon: <div>ICON</div>,
+    icon: <IconStar size={styles.dims.icon.medium} />,
     label: 'Topics',
     onClick: () => nav('', onMenu),
     entries: topics.map((topic) => ({
-      icon: <div>ICON</div>,
+      icon: <IconStarOutline size={styles.dims.icon.small} />,
       label: topic,
       onClick: () => {
         nav(`#topics-${topic}-1`, onMenu);
