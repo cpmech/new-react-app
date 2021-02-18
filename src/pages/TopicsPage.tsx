@@ -2,9 +2,8 @@
 import { css } from '@emotion/react';
 import { useEffect } from 'react';
 import { isValidPositiveNumber } from '@cpmech/util';
-import { RcCenterPage, RcReadyOrErrorPopup } from '../rcomps';
+import { RcReadyOrErrorPopup } from '../rcomps';
 import { store, useStoreObserver } from '../service';
-import { styles } from '../styles';
 
 export interface TopicsPageProps {
   topicId: string;
@@ -12,7 +11,7 @@ export interface TopicsPageProps {
 }
 
 export const TopicsPage: React.FC<TopicsPageProps> = ({ topicId, sectionId }) => {
-  const { error, started } = useStoreObserver('TopicsPage');
+  const { error, ready } = useStoreObserver('TopicsPage');
 
   useEffect(() => {
     if (topicId) {
@@ -20,14 +19,8 @@ export const TopicsPage: React.FC<TopicsPageProps> = ({ topicId, sectionId }) =>
     }
   }, [topicId]);
 
-  if (!started) {
-    return (
-      <RcReadyOrErrorPopup
-        ready={started}
-        error={error}
-        onClose={() => console.log("navigate('/')")}
-      />
-    );
+  if (!ready) {
+    return <RcReadyOrErrorPopup ready={ready} error={error} onClose={() => store.navigate()} />;
   }
 
   if (!isValidPositiveNumber(sectionId || '')) {
@@ -35,24 +28,25 @@ export const TopicsPage: React.FC<TopicsPageProps> = ({ topicId, sectionId }) =>
       <RcReadyOrErrorPopup
         ready={false}
         error="SectionId number is invalid"
-        onClose={() => console.log("navigate('/')")}
+        onClose={() => store.navigate()}
       />
     );
   }
 
   return (
-    <RcCenterPage
-      heightMenu={`calc(${styles.dims.header.height} + ${styles.dims.footer.height})`}
-      colorMessage={styles.colors.green()}
+    <div
+      css={css`
+        background-color: #ffffff;
+        margin: 60px 20px;
+        font-size: 1.3em;
+      `}
     >
-      <div
-        css={css`
-          text-decoration: underline;
-        `}
-      >
-        <div>{`topicId = "${topicId}"`}</div>
-        <div>{`sectionId = "${sectionId}"`}</div>
-      </div>
-    </RcCenterPage>
+      <h1>TOPIC</h1>
+
+      <p>Work in progress...</p>
+
+      <p>{`topicId = "${topicId}"`}</p>
+      <p>{`sectionId = "${sectionId}"`}</p>
+    </div>
   );
 };

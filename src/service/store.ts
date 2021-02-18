@@ -129,15 +129,15 @@ class Store extends SimpleStore<IState, null> {
   };
 
   loadTopic = async (id: string, forceReload = true) => {
-    this.notifyBeginStart();
+    this.notifyBeginReady();
     console.log('loadTopic: TODO');
-    this.notifyEndStart();
+    this.notifyEndReady();
   };
 
   downloadJson = async () => {
-    this.notifyBeginStart();
+    this.notifyBeginReady();
     downloadJson(this.state.data, `my-data`);
-    this.notifyEndStart();
+    this.notifyEndReady();
   };
 }
 

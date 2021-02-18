@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { RcCenterPage } from '../rcomps';
-import { styles } from '../styles';
+import { css } from '@emotion/react';
 
 export interface AboutPageProps {
   category: string;
@@ -8,10 +7,16 @@ export interface AboutPageProps {
 
 export const AboutPage: React.FC<AboutPageProps> = ({ category }) => {
   return (
-    <RcCenterPage
-      message={`About Page. Category = ${category}`}
-      heightMenu={`calc(${styles.dims.header.height} + ${styles.dims.footer.height})`}
-      colorMessage={styles.colors.orange()}
-    />
+    <div
+      css={css`
+        background-color: #ffffff;
+        margin: 60px 20px;
+        font-size: 1.3em;
+      `}
+    >
+      <h1>ABOUT</h1>
+
+      <p>Work in progress...</p>
+    </div>
   );
 };
