@@ -3,20 +3,26 @@ import { AboutPage } from './AboutPage';
 import { HomePage } from './HomePage';
 import { LegalPpPage } from './LegalPpPage';
 import { LegalTsPage } from './LegalTsPage';
+import { LoadingPage } from './LoadingPage';
 import { NotFoundPage } from './NotFoundPage';
+import { SignInPage } from './SignInPage';
 import { TopicsPage } from './TopicsPage';
+
+const gateStatus = {
+  ready: true,
+  hasAccess: true,
+  waitApple: false,
+  waitFacebook: false,
+  waitGoogle: false,
+};
 
 export const Router: React.FC = () => {
   const { route } = useStoreObserver('Router');
 
   const [hash, first, second] = route.split('-');
 
-  if (hash === '#topics' && first && second) {
-    return <TopicsPage topicId={first} sectionId={second} />;
-  }
-
-  if (hash === '#about') {
-    return <AboutPage category="me" />;
+  if (route.length === 0 || hash === '' || hash === '#' || hash === '#home') {
+    return <HomePage />;
   }
 
   if (hash === '#legalpp') {
@@ -27,9 +33,34 @@ export const Router: React.FC = () => {
     return <LegalTsPage />;
   }
 
-  if (route.length > 1) {
-    return <NotFoundPage />;
+  if (hash === '#about') {
+    return <AboutPage category="me" />;
   }
 
-  return <HomePage />;
+  if (hash === '#signin') {
+    if (!gateStatus.ready) {
+      return <LoadingPage />;
+    }
+    if (gateStatus.hasAccess) {
+      return <HomePage />;
+    }
+    return <SignInPage />;
+  }
+
+  // protected route
+  if (hash === '#topics' && first && second) {
+    if (gateStatus.hasAccess) {
+      return <TopicsPage topicId={first} sectionId={second} />;
+    } else {
+      return <SignInPage />;
+    }
+  }
+
+  // waiting federation login
+  if (hash === '#_=_' || gateStatus.waitApple || gateStatus.waitFacebook || gateStatus.waitGoogle) {
+    return <LoadingPage />;
+  }
+
+  // not found
+  return <NotFoundPage />;
 };

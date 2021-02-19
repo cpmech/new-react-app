@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { Footer, Header, SideBar, Warning } from './layout';
-import { RcCenterPage, rcConfig, RcLayout, RcSideNav, RcSpinnerPage } from './rcomps';
+import { rcConfig, RcLayout, RcSideNav } from './rcomps';
 import { Router } from './pages';
 import { styles } from './styles';
 import { store, useStoreObserver } from './service';
@@ -10,15 +10,7 @@ rcConfig.media.desktop.maxPageWidth = styles.dims.minMaxPageWidth;
 
 export const App: React.FC = () => {
   const condition = useStoreObserver('App');
-
   const isNarrow = useMediaQuery({ maxWidth: rcConfig.media.phone.maxWidth });
-
-  if (!condition.started) {
-    if (condition.error) {
-      return <RcCenterPage message={condition.error} />;
-    }
-    return <RcSpinnerPage />;
-  }
 
   const warning = condition.showWarning && <Warning />;
 
